@@ -1,6 +1,6 @@
 import { JwtPayload } from './jwt-payload.interface';
-import { SignInDto } from './../users/dto/sign-in.dto';
-import { SignUpDto } from './../users/dto/sign-up.dto';
+import { SignInDto } from './dto/sign-in.dto';
+import { SignUpDto } from './dto/sign-up.dto';
 import { UserRepository } from './../users/user.repository';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
