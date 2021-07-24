@@ -1,5 +1,5 @@
-import { SignUpDto } from './dto/sign-up.dto';
-import { SignInDto } from './dto/sign-in.dto';
+import { SignUpDto } from '../auth/dto/sign-up.dto';
+import { SignInDto } from '../auth/dto/sign-in.dto';
 import { EntityRepository, Repository } from 'typeorm';
 import { User } from './user.entity';
 import {
