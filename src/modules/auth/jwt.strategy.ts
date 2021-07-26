@@ -1,6 +1,6 @@
 import { User } from './../users/user.entity';
 import { UserRepository } from './../users/user.repository';
-import { JwtPayload } from './jwt-payload.interface';
+import { JwtPayloadDto } from './dto/jwt-payload.dto';
 import { JWT_SECRET_KEY } from './../../config/common-configs';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
@@ -19,10 +19,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: JwtPayload): Promise<User> {
-    const { username } = payload;
+  async validate(payload: JwtPayloadDto): Promise<User> {
+    const { idUser, username } = payload;
     const user = await this.userRepository.findOne(
-      { username },
+      { id_user: idUser, username },
       { select: ['id_user', 'username', 'role'] },
     );
 

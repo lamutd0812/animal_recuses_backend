@@ -22,9 +22,11 @@ import { TaskStatus } from './task-status.enum';
 import { Task } from './task.entity';
 import { TasksService } from './tasks.service';
 import { ERole } from 'src/config/constants';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('tasks')
 @Authorization()
+@ApiTags('tasks')
 export class TasksController {
   private logger = new Logger('TasksController');
   constructor(private tasksService: TasksService) {}
