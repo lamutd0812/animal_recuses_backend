@@ -1,16 +1,9 @@
-import { User } from './../users/user.entity';
-import { ReqUser } from '../../common/decorators/req-user.decorator';
+import { SigninResponseDto } from './dto/sign-in-response.dto';
+import { CommonResponseDto } from './../../common/dto/common-response.dto';
 import { SignInDto } from './dto/sign-in.dto';
 import { AuthService } from './auth.service';
 import { SignUpDto } from './dto/sign-up.dto';
-import {
-  Body,
-  Controller,
-  Post,
-  UseGuards,
-  ValidationPipe,
-} from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Body, Controller, Post, ValidationPipe } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 
 @Controller('auth')
@@ -20,21 +13,19 @@ export class AuthController {
 
   @Post('/signup')
   @ApiOperation({ summary: 'Signup' })
-  @ApiOkResponse({ status: 201 })
-  signUp(@Body(ValidationPipe) signUpDto: SignUpDto): Promise<void> {
+  @ApiOkResponse({ type: CommonResponseDto })
+  signUp(
+    @Body(ValidationPipe) signUpDto: SignUpDto,
+  ): Promise<CommonResponseDto> {
     return this.authService.signUp(signUpDto);
   }
 
   @Post('/signin')
   @ApiOperation({ summary: 'Signin' })
-  @ApiOkResponse({ status: 200 })
-  signIn(@Body(ValidationPipe) signInDto: SignInDto): Promise<any> {
+  @ApiOkResponse({ type: SigninResponseDto })
+  signIn(
+    @Body(ValidationPipe) signInDto: SignInDto,
+  ): Promise<CommonResponseDto> {
     return this.authService.signIn(signInDto);
-  }
-
-  @Post('/test')
-  @UseGuards(AuthGuard())
-  test(@ReqUser() user: User) {
-    console.log(111111111, user);
   }
 }
