@@ -28,9 +28,7 @@ async function bootstrap() {
 
   SwaggerModule.setup('api-docs', app, document, {
     swaggerOptions: {
-      defaultModelsExpandDepth: -1,
       displayRequestDuration: true,
-      docExpansion: 'none',
       filter: true,
     },
   });

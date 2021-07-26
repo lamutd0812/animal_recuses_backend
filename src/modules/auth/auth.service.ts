@@ -1,4 +1,6 @@
-import { JwtPayload } from './jwt-payload.interface';
+import { SigninResponseDto } from './dto/sign-in-response.dto';
+import { CommonResponseDto } from './../../common/dto/common-response.dto';
+import { JwtPayloadDto } from './dto/jwt-payload.dto';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
 import { UserRepository } from './../users/user.repository';
@@ -14,20 +16,46 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signUp(signUpDto: SignUpDto): Promise<void> {
-    return await this.userRepository.signUp(signUpDto);
+  async signUp(signUpDto: SignUpDto): Promise<CommonResponseDto> {
+    const username = await this.userRepository.signUp(signUpDto);
+    return new CommonResponseDto(
+      true,
+      { username },
+      'Create account successfully.',
+    );
   }
 
-  async signIn(signInDto: SignInDto): Promise<any> {
-    const username = await this.userRepository.signIn(signInDto);
+  async signIn(signInDto: SignInDto): Promise<SigninResponseDto> {
+    const user = await this.userRepository.signIn(signInDto);
 
-    if (!username) {
+    if (!user) {
       throw new UnauthorizedException('Username or password incorrect.');
     }
 
-    const payload: JwtPayload = { username };
-    const accessToken = await this.jwtService.sign(payload);
+    const {
+      id_user: idUser,
+      username,
+      fullname,
+      email,
+      address,
+      phone_number: phoneNumber,
+      role,
+    } = user;
 
-    return { accessToken };
+    const jwtObject = {
+      idUser,
+      username,
+      fullname,
+      email,
+      address,
+      phoneNumber,
+      role,
+    };
+
+    const accessToken = await this.jwtService.sign(jwtObject);
+    const payload: JwtPayloadDto = { ...jwtObject, accessToken };
+    const message = 'Signed in successfully.';
+
+    return new SigninResponseDto(true, payload, message);
   }
 }

@@ -1,11 +1,14 @@
+import { ERole } from 'src/config/constants';
 import { Task } from './../tasks/task.entity';
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   OneToMany,
   PrimaryGeneratedColumn,
   Unique,
+  UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
@@ -15,7 +18,7 @@ export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id_user: number;
 
-  @Column()
+  @Column({ unique: true })
   username: string;
 
   @Column()
@@ -25,9 +28,27 @@ export class User extends BaseEntity {
   salt: string;
 
   @Column()
-  role: string;
+  fullname: string;
 
-  @OneToMany(() => Task, (task) => task.user, { eager: true })
+  @Column({ unique: true })
+  email: string;
+
+  @Column({ nullable: true })
+  address: string;
+
+  @Column()
+  phone_number: string;
+
+  @Column()
+  role: ERole;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
+  @OneToMany(() => Task, (task) => task.user, { eager: false })
   tasks: Task[];
 
   async validatePassword(password: string): Promise<boolean> {
