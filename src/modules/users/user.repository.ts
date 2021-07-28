@@ -27,7 +27,7 @@ export class UserRepository extends Repository<User> {
     user.address = address ? address : null;
     user.phone_number = phone_number;
     user.salt = salt;
-    user.role = ERole.STAFF;
+    user.role = ERole.VOLUNTEER;
 
     try {
       const savedUser = await user.save();

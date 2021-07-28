@@ -33,7 +33,7 @@ export class TasksController {
 
   @Get()
   // @Roles(ERole.STAFF, ERole.MANAGER)
-  @Roles(ERole.MANAGER)
+  @Roles(ERole.ADMIN)
   getTasks(
     @Query(ValidationPipe) filterDto: GetTasksFilterDto,
     @ReqUser() user: User,

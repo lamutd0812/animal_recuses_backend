@@ -15,7 +15,6 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   username: NODE_APP_DB_USERNAME,
   password: NODE_APP_DB_PASSWORD,
   database: NODE_APP_DB_DATABASE,
-  // entities: [__dirname + '/../**/*.entity.{js,ts}'],
-  autoLoadEntities: true,
+  entities: [__dirname + '/../**/*.entity.{js,ts}'],
   synchronize: true,
 };
