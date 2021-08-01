@@ -1,3 +1,4 @@
+import { PaginationQueryDto } from './../../common/dto/pagination-query-dto';
 import { CommonResponseDto } from './../../common/dto/common-response.dto';
 import { AddAnimalDto } from './dto/add-animal.dto';
 import { AnimalRepository } from './animal.repository';
@@ -11,17 +12,19 @@ export class AnimalsService {
     private animalRepository: AnimalRepository,
   ) {}
 
-  async searchAnimals(): Promise<CommonResponseDto> {
-    const animals = await this.animalRepository.searchAnimals();
+  async searchAnimals(query: PaginationQueryDto): Promise<CommonResponseDto> {
+    const animals = await this.animalRepository.searchAnimals(query);
     return new CommonResponseDto(true, animals, 'Search animals successfully.');
   }
 
   async addAnimal(
     addAnimalDto: AddAnimalDto,
+    filename: string,
     idUser: number,
   ): Promise<CommonResponseDto> {
     const newAnimal = await this.animalRepository.addAnimal(
       addAnimalDto,
+      filename,
       idUser,
     );
 

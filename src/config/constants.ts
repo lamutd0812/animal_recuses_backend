@@ -8,3 +8,13 @@ export enum ERole {
   USER = 'User',
   CLINIC = 'Clinic',
 }
+
+export enum ESort {
+  ASC = '1',
+  DESC = '-1',
+}
+
+export enum EStaticDirectory {
+  IMAGES = 'images',
+  DOCUMENTS = 'documents',
+}

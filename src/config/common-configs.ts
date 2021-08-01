@@ -9,6 +9,7 @@ export const getEnv = (key: string): string => {
 
 // Configs
 export const NODE_APP_PRODUCTION_MODE = getEnv('NODE_APP_PRODUCTION_MODE');
+export const NODE_APP_SERVER_ADDRESS = getEnv('NODE_APP_SERVER_ADDRESS');
 export const NODE_APP_PORT = Number(getEnv('NODE_APP_PORT'));
 
 export const NODE_APP_DB_TYPE = 'postgres';

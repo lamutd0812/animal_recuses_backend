@@ -10,11 +10,11 @@ export class AddAnimalDto {
   @IsNotEmpty()
   hairColor: string;
 
-  @ApiProperty({ example: 2 })
+  @ApiProperty({ example: 12 })
   @IsNotEmpty()
   age: number;
 
-  @ApiProperty({ example: 'https://....jpg' })
+  @ApiProperty({ type: 'string', format: 'binary', required: false })
   image: string;
 
   @ApiProperty({ example: 'this is animal description.' })
