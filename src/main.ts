@@ -11,7 +11,6 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const logger = new Logger('bootstrap');
 
-  const port = NODE_APP_PORT;
   const app = await NestFactory.create(AppModule);
 
   // Morgan logger
@@ -33,7 +32,7 @@ async function bootstrap() {
     },
   });
 
-  await app.listen(port);
-  logger.log(`Application running on port ${port}.`);
+  await app.listen(NODE_APP_PORT);
+  logger.log(`Application running on port ${NODE_APP_PORT}.`);
 }
 bootstrap();

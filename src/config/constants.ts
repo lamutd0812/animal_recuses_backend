@@ -3,6 +3,18 @@ export const ROLES_KEY = 'roles';
 
 // Enums
 export enum ERole {
-  STAFF = 'Staff',
-  MANAGER = 'Manager',
+  ADMIN = 'Admin',
+  VOLUNTEER = 'Volunteer',
+  USER = 'User',
+  CLINIC = 'Clinic',
+}
+
+export enum ESort {
+  ASC = '1',
+  DESC = '-1',
+}
+
+export enum EStaticDirectory {
+  IMAGES = 'images',
+  DOCUMENTS = 'documents',
 }

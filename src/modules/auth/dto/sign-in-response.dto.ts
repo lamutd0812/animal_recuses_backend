@@ -6,10 +6,10 @@ export class SigninResponseDto {
   success: boolean;
 
   @ApiProperty()
-  data?: JwtPayloadDto;
+  data: JwtPayloadDto;
 
   @ApiProperty()
-  message?: string;
+  message: string;
 
   constructor(success: boolean, data: any, message: string) {
     this.success = success;

@@ -1,4 +1,5 @@
 import { ERole } from 'src/config/constants';
+import { Animal } from './../animals/animal.entity';
 import { Task } from './../tasks/task.entity';
 import {
   BaseEntity,
@@ -36,6 +37,9 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   address: string;
 
+  @Column({ nullable: true })
+  profile_image: string;
+
   @Column()
   phone_number: string;
 
@@ -50,6 +54,9 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Task, (task) => task.user, { eager: false })
   tasks: Task[];
+
+  @OneToMany(() => Animal, (animal) => animal.user, { eager: false })
+  animals: Animal[];
 
   async validatePassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.salt);
