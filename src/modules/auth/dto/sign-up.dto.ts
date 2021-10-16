@@ -49,7 +49,7 @@ export class SignUpDto {
   @MinLength(5)
   address: string;
 
-  @ApiProperty({ example: '0984444555' })
+  @ApiProperty({ example: '0984444255' })
   @IsNotEmpty()
   @IsString()
   @MinLength(10)
@@ -57,5 +57,5 @@ export class SignUpDto {
   @Matches(/^[0-9]{10}$/, {
     message: 'Phone number invalid.',
   })
-  phone_number: string;
+  phoneNumber: string;
 }

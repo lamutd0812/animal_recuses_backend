@@ -1,22 +1,28 @@
-FROM node:16-alpine3.11
+## Development ##
+FROM node:14 AS development
 
-RUN mkdir -p /animal-recuces-backend/rest-api
+WORKDIR /animal-recuces/rest-api
 
-WORKDIR /animal-recuces-backend/rest-api
+COPY package*.json ./
 
-COPY package.json package.json
-
-RUN npm install --legacy-peer-deps && npm cache clean --force
+RUN npm install
 
 COPY . .
 
-# Development
-CMD ["npm", "run", "start:dev"]
+RUN npm run build
 
-# Production
-# EXPOSE 8080
-# CMD [ "node", "dist/main" ]
+CMD [ "npm", "run", "start:dev" ]
 
-# Production using pm2
-# RUN npm install -g pm2
-# CMD ["pm2-runtime", "ecosystem.config.js", "--env", "production"]
+## Production ##
+FROM node:14 AS production
+
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+
+WORKDIR /animal-recuces/rest-api
+
+COPY --from=development /animal-recuces/rest-api .
+
+EXPOSE 8080
+
+CMD [ "node", "dist/main" ]

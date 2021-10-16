@@ -15,7 +15,7 @@ export class UserRepository extends Repository<User> {
   private logger = new Logger('TasksController');
 
   async signUp(signUpDto: SignUpDto): Promise<string> {
-    const { username, password, fullname, email, address, phone_number } =
+    const { username, password, fullname, email, address, phoneNumber } =
       signUpDto;
     const salt = await bcrypt.genSalt();
 
@@ -25,7 +25,7 @@ export class UserRepository extends Repository<User> {
     user.fullname = fullname;
     user.email = email;
     user.address = address ? address : null;
-    user.phone_number = phone_number;
+    user.phone_number = phoneNumber;
     user.salt = salt;
     user.role = ERole.VOLUNTEER;
 
