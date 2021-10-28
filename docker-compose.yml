@@ -3,15 +3,7 @@ version: "3.8"
 services: 
   app:
     container_name: animal-recuses
-    image: animal-recuses:v1
-    build:
-      dockerfile: Dockerfile
-      context: .
-      # Only build development stage from dockerfile
-      target: development
-    volumes: 
-      - .:/animal-recuces/rest-api
-      - ./animal-recuces/rest-api/node_modules
+    image: registry.gitlab.com/lamutd0812/animal-recuse-backend:latest
     ports:
       - "${NODE_APP_PORT}:${NODE_APP_PORT}"
     env_file:
@@ -42,7 +34,4 @@ services:
 
 volumes: 
   postgres-data:
-    
-
-
-
+  
